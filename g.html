@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="html-root">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جحيم الوعي | The Hell of Awareness</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Amiri', serif;
+            
+            background-image: url("img.jpeg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #F2F0EB; 
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.55); 
+            z-index: -1;
+        }
+
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 40px;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        button {
+            background-color: transparent;
+            border: 2px solid #8B6A28; 
+            color: #F2F0EB;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        button:hover {
+            background-color: #8B6A28;
+            color: #1C1C1C;
+        }
+
+        
+        h1 {
+            text-align: center;
+            color: #C8A24A; 
+            font-size: 3rem;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #8B6A28;
+            padding-bottom: 15px;
+        }
+
+        
+        .content-box {
+            background-color: #1C1C1C; 
+            border: 1px solid #8B6A28; 
+            border-right: 5px solid #C8A24A; 
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            font-size: 1.4rem;
+            line-height: 1.8;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            transition: transform 0.3s;
+        }
+
+        .content-box:hover {
+            transform: translateY(-5px);
+        }
+
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #8B6A28;
+            color: #C8A24A;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="overlay"></div>
+
+    
+    <audio id="bg-music" loop>
+        <source src="mp.3.mpeg" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        
+        <div class="controls">
+            <button id="btn-music" onclick="toggleMusic()">هل تريد الاستماع للموسيقى وأنت تقرأ؟</button>
+            <button id="btn-lang" onclick="toggleLanguage()">Translate to English</button>
+            <button id="btn-read" onclick="readText()">قراءة صوتية للنص</button>
+        </div>
+
+        <h1 id="main-title">جحيم الوعي</h1>
+
+        <!-- صناديق النص -->
+        <div class="content-box" id="p1">
+            ليس الجحيم نارًا دائمًا، ولا سلاسل من حديد، ولا صرخات تتردد في فراغٍ لا ينتهي. أحيانًا... يكون الجحيم هو أن ترى أكثر مما ينبغي.
+        </div>
+
+        <div class="content-box" id="p2">
+            أن تمتلك وعيًا لا يسمح لك بالمرور فوق الأشياء كما يفعل الآخرون، بل يجبرك على الوقوف أمام كل تفصيلة، وتحليل كل كلمة، وإعادة كل ذكرى مئات المرات حتى تفقد معناها، ثم تعود لتبحث عنها من جديد.
+        </div>
+
+        <div class="content-box" id="p3">
+            الوعي هبة... لكنه قد يتحول إلى عبء حين يصبح أثقل من قدرة القلب على الاحتمال.
+        </div>
+
+        <div class="content-box" id="p4">
+            هناك أناس يعيشون الحياة كما هي؛ يضحكون، ينسون، ينامون، ثم يستيقظون ليبدأوا يومًا جديدًا. وهناك آخرون يحملون داخل رؤوسهم عوالم كاملة لا تهدأ. بالنسبة لهم، لا ينتهي اليوم عندما تغيب الشمس، بل يبدأ عندما يخلو المكان من الضوضاء، ويصبح العقل وحده سيد الموقف.
+        </div>
+
+        <div class="content-box" id="p5">
+            في تلك اللحظات، تتحول الذاكرة إلى محكمة، والأفكار إلى قضاة لا يعرفون الرحمة. كل قرار يُراجع، وكل كلمة تُفسر، وكل خطأ يُعاد إحياؤه وكأنه حدث قبل دقائق. الوعي لا يترك لصاحبه رفاهية الجهل. إنه يسلط الضوء على كل تناقض، وكل زيف، وكل حقيقة كان من الأسهل ألا تُعرف.
+        </div>
+
+        <div class="content-box" id="p6">
+            والغريب أن أكثر ما يؤلم ليس الحقيقة نفسها، بل إدراكها. أن تدرك أن الزمن لا يعود. أن تدرك أن بعض الأشخاص لن يصبحوا كما تمنيت يومًا. أن تدرك أن الأحلام لا يكفيها الشغف وحده، وأن العدالة ليست دائمًا حاضرة، وأن الحياة لا تقدم تفسيرًا لكل ما يحدث.
+        </div>
+
+        <div class="content-box" id="p7">
+            كل هذا الإدراك يتراكم بصمت، حتى يصبح العقل غرفةً ممتلئةً بأصوات لا يسمعها أحد سواك. لكن رغم قسوته، فإن الوعي ليس لعنة خالصة.
+        </div>
+
+        <div class="content-box" id="p8">
+            هو الذي يجعل الإنسان يندهش أمام فكرة، ويبكي أمام قصيدة، ويشعر بعظمة السماء وهو ينظر إليها في ليلة هادئة. هو الذي يدفع العلماء لاكتشاف المجهول، والفلاسفة لطرح الأسئلة، والفنانين لرسم ما لا تستطيع الكلمات وصفه. الوعي هو السلاح الذي يبني الحضارات... وهو السيف الذي قد يجرح صاحبه.
+        </div>
+
+        <div class="content-box" id="p9">
+            ربما لا يكون الحل في الهروب من التفكير، بل في التصالح معه. أن تدرك أن ليس لكل سؤال إجابة، وليس لكل ألم تفسير، وأن بعض الغموض جزء من طبيعة الحياة نفسها.
+        </div>
+
+        <div class="content-box" id="p10">
+            فالإنسان لا يُقاس بعدد الأفكار التي يحملها، بل بقدرته على ألا يسمح لها بابتلاع حياته. وربما يكون أعظم أشكال الحكمة ليس أن تعرف كل شيء... بل أن تعرف متى تتوقف عن مطاردة ما لا يمكن الوصول إليه.
+        </div>
+
+        <div class="content-box" id="p11">
+            لأن جحيم الوعي لا يبدأ عندما نفكر كثيرًا، بل عندما ننسى أن الحياة ليست مسألةً يجب حلها، وإنما رحلةٌ يجب أن تُعاش، بكل ما فيها من يقينٍ وغموض، وانتصاراتٍ وانكسارات، وأسئلةٍ قد تظل بلا إجابة إلى الأبد.
+        </div>
+
+        <footer>
+            <span id="copyright">حقوق النشر محفوظة © 2026 Old Wolf للبرمجيات - الفنان جورج عماد رمزي</span>
+        </footer>
+    </div>
+
+    <script>
+        
+        let isArabic = true;
+        let isMusicPlaying = false;
+        let audio = document.getElementById('bg-music');
+        let synthesis = window.speechSynthesis;
+
+        
+        function toggleMusic() {
+            if (isMusicPlaying) {
+                audio.pause();
+                isMusicPlaying = false;
+                document.getElementById('btn-music').innerText = isArabic ? "تشغيل الموسيقى" : "Play Music";
+            } else {
+                audio.play();
+                isMusicPlaying = true;
+                document.getElementById('btn-music').innerText = isArabic ? "إيقاف الموسيقى" : "Stop Music";
+            }
+        }
+
+        
+        const texts = {
+            'main-title': { ar: "جحيم الوعي", en: "The Hell of Awareness" },
+            'btn-music': { ar: isMusicPlaying ? "إيقاف الموسيقى" : "هل تريد الاستماع للموسيقى وأنت تقرأ؟", en: isMusicPlaying ? "Stop Music" : "Do you want to listen to music while reading?" },
+            'btn-lang': { ar: "Translate to English", en: "ترجمة للعربية" },
+            'btn-read': { ar: "قراءة صوتية للنص", en: "Read Text Aloud" },
+            'copyright': { ar: "حقوق النشر محفوظة © 2026 Old Wolf للبرمجيات - الفنان جورج عماد رمزي", en: "Copyright © 2026 Old Wolf Software - Artist George Emad Ramzy" },
+            'p1': { ar: "ليس الجحيم نارًا دائمًا، ولا سلاسل من حديد، ولا صرخات تتردد في فراغٍ لا ينتهي. أحيانًا... يكون الجحيم هو أن ترى أكثر مما ينبغي.", en: "Hell is not always fire, nor iron chains, nor screams echoing in an endless void. Sometimes... hell is seeing more than you should." },
+            'p2': { ar: "أن تمتلك وعيًا لا يسمح لك بالمرور فوق الأشياء كما يفعل الآخرون، بل يجبرك على الوقوف أمام كل تفصيلة، وتحليل كل كلمة، وإعادة كل ذكرى مئات المرات حتى تفقد معناها، ثم تعود لتبحث عنها من جديد.", en: "To possess an awareness that doesn't allow you to skim over things like others do, but forces you to pause at every detail, analyze every word, and replay every memory hundreds of times until it loses its meaning, only to return and search for it again." },
+            'p3': { ar: "الوعي هبة... لكنه قد يتحول إلى عبء حين يصبح أثقل من قدرة القلب على الاحتمال.", en: "Awareness is a gift... but it can turn into a burden when it becomes heavier than the heart can bear." },
+            'p4': { ar: "هناك أناس يعيشون الحياة كما هي؛ يضحكون، ينسون، ينامون، ثم يستيقظون ليبدأوا يومًا جديدًا. وهناك آخرون يحملون داخل رؤوسهم عوالم كاملة لا تهدأ. بالنسبة لهم، لا ينتهي اليوم عندما تغيب الشمس، بل يبدأ عندما يخلو المكان من الضوضاء، ويصبح العقل وحده سيد الموقف.", en: "There are people who live life as it is; they laugh, forget, sleep, and then wake up to start a new day. And there are others who carry entire restless worlds inside their heads. For them, the day doesn't end when the sun goes down, but begins when the place empties of noise, and the mind alone becomes the master of the situation." },
+            'p5': { ar: "في تلك اللحظات، تتحول الذاكرة إلى محكمة، والأفكار إلى قضاة لا يعرفون الرحمة. كل قرار يُراجع، وكل كلمة تُفسر، وكل خطأ يُعاد إحياؤه وكأنه حدث قبل دقائق. الوعي لا يترك لصاحبه رفاهية الجهل. إنه يسلط الضوء على كل تناقض، وكل زيف، وكل حقيقة كان من الأسهل ألا تُعرف.", en: "In those moments, memory turns into a court, and thoughts into merciless judges. Every decision is reviewed, every word is interpreted, and every mistake is resurrected as if it happened minutes ago. Awareness leaves its owner no luxury of ignorance. It sheds light on every contradiction, every falsehood, and every truth that would have been easier not to know." },
+            'p6': { ar: "والغريب أن أكثر ما يؤلم ليس الحقيقة نفسها، بل إدراكها. أن تدرك أن الزمن لا يعود. أن تدرك أن بعض الأشخاص لن يصبحوا كما تمنيت يومًا. أن تدرك أن الأحلام لا يكفيها الشغف وحده، وأن العدالة ليست دائمًا حاضرة، وأن الحياة لا تقدم تفسيرًا لكل ما يحدث.", en: "The strange thing is that what hurts the most is not the truth itself, but the realization of it. To realize that time does not return. To realize that some people will never become who you wished them to be. To realize that passion alone is not enough for dreams, that justice is not always present, and that life does not offer an explanation for everything that happens." },
+            'p7': { ar: "كل هذا الإدراك يتراكم بصمت، حتى يصبح العقل غرفةً ممتلئةً بأصوات لا يسمعها أحد سواك. لكن رغم قسوته، فإن الوعي ليس لعنة خالصة.", en: "All this realization accumulates silently, until the mind becomes a room full of voices no one hears but you. Yet despite its cruelty, awareness is not a pure curse." },
+            'p8': { ar: "هو الذي يجعل الإنسان يندهش أمام فكرة، ويبكي أمام قصيدة، ويشعر بعظمة السماء وهو ينظر إليها في ليلة هادئة. هو الذي يدفع العلماء لاكتشاف المجهول، والفلاسفة لطرح الأسئلة، والفنانين لرسم ما لا تستطيع الكلمات وصفه. الوعي هو السلاح الذي يبني الحضارات... وهو السيف الذي قد يجرح صاحبه.", en: "It is what makes a human marvel at an idea, cry over a poem, and feel the greatness of the sky while looking at it on a quiet night. It is what drives scientists to discover the unknown, philosophers to ask questions, and artists to draw what words cannot describe. Awareness is the weapon that builds civilizations... and it is the sword that may wound its wielder." },
+            'p9': { ar: "ربما لا يكون الحل في الهروب من التفكير، بل في التصالح معه. أن تدرك أن ليس لكل سؤال إجابة، وليس لكل ألم تفسير، وأن بعض الغموض جزء من طبيعة الحياة نفسها.", en: "Perhaps the solution lies not in escaping thought, but in making peace with it. To realize that not every question has an answer, not every pain has an explanation, and that some mystery is part of the nature of life itself." },
+            'p10': { ar: "فالإنسان لا يُقاس بعدد الأفكار التي يحملها، بل بقدرته على ألا يسمح لها بابتلاع حياته. وربما يكون أعظم أشكال الحكمة ليس أن تعرف كل شيء... بل أن تعرف متى تتوقف عن مطاردة ما لا يمكن الوصول إليه.", en: "For a person is not measured by the number of thoughts they carry, but by their ability not to let them swallow their life. And perhaps the greatest form of wisdom is not to know everything... but to know when to stop chasing the unattainable." },
+            'p11': { ar: "لأن جحيم الوعي لا يبدأ عندما نفكر كثيرًا، بل عندما ننسى أن الحياة ليست مسألةً يجب حلها، وإنما رحلةٌ يجب أن تُعاش، بكل ما فيها من يقينٍ وغموض، وانتصاراتٍ وانكسارات، وأسئلةٍ قد تظل بلا إجابة إلى الأبد.", en: "Because the hell of awareness does not begin when we think too much, but when we forget that life is not a problem to be solved, but a journey to be lived, with all its certainty and mystery, victories and defeats, and questions that may remain unanswered forever." }
+        };
+
+        
+        function toggleLanguage() {
+            isArabic = !isArabic;
+            document.getElementById('html-root').dir = isArabic ? 'rtl' : 'ltr';
+            
+            
+            let boxes = document.querySelectorAll('.content-box');
+            boxes.forEach(box => {
+                if (isArabic) {
+                    box.style.borderRight = "5px solid #C8A24A";
+                    box.style.borderLeft = "1px solid #8B6A28";
+                    box.style.textAlign = "right";
+                } else {
+                    box.style.borderLeft = "5px solid #C8A24A";
+                    box.style.borderRight = "1px solid #8B6A28";
+                    box.style.textAlign = "left";
+                }
+            });
+
+            
+            for (let id in texts) {
+                if(id === 'btn-music') {
+                   document.getElementById(id).innerText = isArabic ? 
+                       (isMusicPlaying ? "إيقاف الموسيقى" : "هل تريد الاستماع للموسيقى وأنت تقرأ؟") : 
+                       (isMusicPlaying ? "Stop Music" : "Do you want to listen to music while reading?");
+                } else {
+                   document.getElementById(id).innerText = isArabic ? texts[id].ar : texts[id].en;
+                }
+            }
+        }
+
+        
+        function readText() {
+            synthesis.cancel(); 
+            
+            let fullText = "";
+            for (let i = 1; i <= 11; i++) {
+                fullText += isArabic ? texts['p'+i].ar + " " : texts['p'+i].en + " ";
+            }
+
+            let utterance = new SpeechSynthesisUtterance(fullText);
+            utterance.lang = isArabic ? 'ar-SA' : 'en-US';
+            utterance.rate = 0.85; 
+            synthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
