@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حين يشيخ الطفل قبل أن يتعلم الضحك</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --overlay: rgba(0, 0, 0, 0.45);
+            --box-bg: rgba(18, 18, 18, 0.75);
+            --btn-bg: rgba(20, 20, 20, 0.75);
+            --text-color: #F5F5F5;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url("imgn.jpeg"); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--overlay);
+            z-index: -1;
+        }
+
+        .page-layout {
+            display: flex;
+            justify-content: center; 
+            padding: 40px 5%;
+            flex: 1;
+            transition: all 0.5s ease;
+        }
+
+        .main-content {
+            width: 100%;
+            max-width: 1000px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.5s ease;
+        }
+
+        .title {
+            font-family: 'Aref Ruqaa', serif;
+            color: var(--gold);
+            text-align: center;
+            font-size: 2.75em; 
+            margin-bottom: 50px;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.25);
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+            justify-content: center;
+            position: relative;
+        }
+
+        button {
+            background-color: var(--btn-bg);
+            border: 1px solid var(--gold);
+            color: #FFFFFF;
+            font-family: 'Cairo', sans-serif;
+            padding: 12px 24px;
+            font-size: 1.1em;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        button:hover {
+            background-color: var(--gold);
+            color: #111111;
+        }
+
+        .like-icon { margin-right: 5px; }
+        .liked { color: #ff4d4d; }
+
+        .article-container {
+            width: 100%;
+            transition: all 0.5s ease;
+        }
+
+        .text-box {
+            font-family: 'Amiri', serif;
+            color: var(--text-color);
+            background-color: var(--box-bg);
+            border: 2px solid var(--gold);
+            border-radius: 15px;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px); 
+            padding: 30px;
+            margin-bottom: 30px;
+            font-size: 32px; 
+            line-height: 1.9;
+            letter-spacing: 0.3px;
+            text-align: justify;
+            transition: all 0.5s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5); 
+        }
+
+        @media (max-width: 768px) {
+            .text-box {
+                font-size: 24px;
+                padding: 20px;
+            }
+            .title {
+                font-size: 2em;
+            }
+        }
+
+        .footer {
+            font-family: 'Cairo', sans-serif;
+            background-color: rgba(18, 18, 18, 0.85);
+            border-top: 2px solid var(--gold);
+            color: var(--gold);
+            text-align: center;
+            padding: 20px;
+            font-size: 1.1em;
+            margin-top: auto;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.3);
+        }
+
+        body.reading-mode .controls .hide-in-reading {
+            display: none; 
+        }
+        body.reading-mode .main-content {
+            max-width: 1200px; 
+        }
+        body.reading-mode .text-box {
+            background-color: rgba(10, 10, 10, 0.9); 
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="audioPlayer" src="mp.3.mpeg" loop></audio>
+
+    <div class="page-layout">
+        <main class="main-content">
+            <h1 class="title">حين يشيخ الطفل قبل أن يتعلم الضحك</h1>
+
+            <div class="controls">
+                <button class="btn-listen" onclick="toggleSpeech()">🎧 استماع</button>
+                <button class="btn-translate hide-in-reading" onclick="toggleLanguage()">🌍 English</button>
+                <button class="btn-music hide-in-reading" id="musicBtn" onclick="toggleMusic()">🎼 موسيقى</button>
+                <button class="btn-mode" onclick="toggleReadingMode()">📖 وضع القراءة</button>
+                <button class="btn-like hide-in-reading" onclick="toggleLike()">
+                    <span class="like-icon" id="heartIcon">🤍</span> إعجاب
+                </button>
+            </div>
+
+            <div class="article-container" id="articleBody"></div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        جميع حقوق النشر محفوظة &copy; شركة Old Wolf للبرمجيات التابعة للفنان جورج عماد رمزي
+    </footer>
+
+    <script>
+        const articleData = [
+            {
+                ar: "ليست كل الطفولة تُقاس بعدد السنوات، بل بعدد الأحلام التي نجت من قسوة العالم. هناك أطفال لم يعرفوا معنى أن يكون الصباح بداية للعب، بل بداية ليوم عمل طويل، يحملون فيه أثقالًا أكبر من أعمارهم. وأطفال آخرون لم يسرق منهم الفقر وقتهم فقط، بل سرق منهم القدرة على الحلم.",
+                en: "Not all childhood is measured by the number of years, but by the number of dreams that survived the cruelty of the world. There are children who never knew the meaning of morning as a start for play, but rather the start of a long workday, carrying burdens heavier than their age. And other children from whom poverty did not only steal their time, but also their ability to dream."
+            },
+            {
+                ar: "وفي مكان آخر، يقف طفل وسط أنقاض بيت كان يومًا وطنًا. لا يبحث عن لعبة ضائعة، بل عن أمٍ أو أبٍ أو أخٍ اختفى تحت الركام. يسمع أصوات الانفجارات أكثر مما سمع حكايات ما قبل النوم، ويحفظ أسماء الأسلحة أكثر مما يحفظ أسماء الألوان.",
+                en: "In another place, a child stands amidst the ruins of a house that was once a homeland. They are not looking for a lost toy, but for a mother, father, or brother who disappeared under the rubble. They hear the sounds of explosions more than they ever heard bedtime stories, and memorize the names of weapons more than the names of colors."
+            },
+            {
+                ar: "كيف يمكن لطفل أن يفهم معنى السلام وهو لم يعرف سوى الخوف؟ وكيف يتعلم الضحك إذا كان العالم يطلب منه أن يكبر قبل أوانه؟",
+                en: "How can a child understand the meaning of peace when they have known nothing but fear? And how do they learn to laugh if the world demands that they grow up before their time?"
+            },
+            {
+                ar: "الطفولة ليست مرحلة عمرية فحسب، بل حقٌ في البراءة، وحقٌ في الخطأ، وحقٌ في أن يكون الهم الأكبر هو لعبة مكسورة، لا رغيفًا مفقودًا أو سقفًا انهار فوق من يحب.",
+                en: "Childhood is not just an age stage; it is a right to innocence, a right to make mistakes, and a right for the biggest worry to be a broken toy, not a missing loaf of bread or a roof that collapsed on loved ones."
+            },
+            {
+                ar: "أقسى ما يمكن أن يحدث للإنسان ليس أن يكبر، بل أن يُجبر على الكِبر قبل أن يعيش طفولته. فعندما يتحول الطفل إلى عامل، أو لاجئ، أو مشرد، أو شاهد على الحرب، لا يخسر سنواتٍ من عمره فقط، بل يخسر جزءًا من إنسانيته التي كان من حقها أن تنمو في أمان.",
+                en: "The harshest thing that can happen to a human being is not growing up, but being forced to age before living their childhood. When a child becomes a worker, a refugee, homeless, or a witness to war, they do not only lose years of their life, but they lose a part of their humanity that had the right to grow in safety."
+            },
+            {
+                ar: "وربما لا تكون مأساة هؤلاء الأطفال أنهم ولدوا في ظروفٍ قاسية، بل أن العالم اعتاد رؤية معاناتهم حتى أصبحت خبرًا عابرًا. وكأن بكاء طفلٍ جائع، أو نظرة طفلٍ فقد أسرته، لم تعد تكفي لإيقاظ ضميرٍ أنهكه الاعتياد.",
+                en: "Perhaps the tragedy of these children is not that they were born in harsh conditions, but that the world has grown accustomed to seeing their suffering until it became passing news. It is as if the cry of a hungry child, or the look of a child who lost their family, is no longer enough to awaken a conscience exhausted by habituation."
+            },
+            {
+                ar: "ويبقى السؤال الذي يطارد الإنسانية: إذا كانت الحضارة تُقاس بما تمنحه لأضعف أفرادها، فكيف نصف عالمًا يسمح لطفلٍ بأن يحمل هموم الرجال، بينما كان يجب أن يحمل بين يديه لعبة... لا عبئًا؟",
+                en: "The question that haunts humanity remains: If civilization is measured by what it grants to its weakest members, how do we describe a world that allows a child to carry the burdens of men, when they should have been carrying a toy... not a burden?"
+            }
+        ];
+
+        let currentLang = 'ar';
+        const articleContainer = document.getElementById('articleBody');
+        const synth = window.speechSynthesis;
+        let isSpeaking = false;
+
+        function renderArticle() {
+            articleContainer.innerHTML = '';
+            articleData.forEach(paragraph => {
+                let div = document.createElement('div');
+                div.className = 'text-box';
+                div.innerText = paragraph[currentLang];
+                articleContainer.appendChild(div);
+            });
+            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            document.documentElement.lang = currentLang;
+            
+            const titleEl = document.querySelector('.title');
+            titleEl.innerText = currentLang === 'ar' ? "حين يشيخ الطفل قبل أن يتعلم الضحك" : "When the Child Ages Before Learning to Laugh";
+        }
+
+        renderArticle();
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            renderArticle();
+            if(synth.speaking) {
+                synth.cancel();
+                isSpeaking = false;
+            }
+        }
+
+        function toggleReadingMode() {
+            document.body.classList.toggle('reading-mode');
+        }
+
+        function toggleLike() {
+            const heart = document.getElementById('heartIcon');
+            if (heart.innerText === '🤍' || heart.innerText === '❤️') {
+                if(heart.classList.contains('liked')){
+                    heart.innerText = '🤍';
+                    heart.classList.remove('liked');
+                } else {
+                    heart.innerText = '❤️';
+                    heart.classList.add('liked');
+                }
+            }
+        }
+
+        function toggleMusic() {
+            const audio = document.getElementById('audioPlayer');
+            const btn = document.getElementById('musicBtn');
+            if (audio.paused) {
+                audio.play();
+                btn.innerText = '⏸️ إيقاف';
+            } else {
+                audio.pause();
+                btn.innerText = '🎼 موسيقى';
+            }
+        }
+
+        function toggleSpeech() {
+            if (synth.speaking) {
+                synth.cancel();
+                isSpeaking = false;
+                return;
+            }
+
+            let fullText = articleData.map(p => p[currentLang]).join('. ');
+            let utterance = new SpeechSynthesisUtterance(fullText);
+            
+            utterance.lang = currentLang === 'ar' ? 'ar-SA' : 'en-US';
+            
+            synth.speak(utterance);
+            isSpeaking = true;
+
+            utterance.onend = function() {
+                isSpeaking = false;
+            }
+        }
+    </script>
+</body>
+</html>
