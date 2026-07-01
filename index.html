@@ -1,183 +1,415 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" id="html-root">
+<html lang="ar" dir="rtl">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DRET66SP06"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-DRET66SP06');
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سحر الكتابة | Old Wolf</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-    
+    <title>سحر الكتابة | عالم التأمل</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        body {
+        :root {
+            --bg-color: #0b0c10;
+            --secondary-bg: #1f2833;
+            --text-color: #c5c6c7;
+            --accent-color: #d4af37;
+            --accent-hover: #f1d570;
+            --font-headings: 'Amiri', serif;
+            --font-text: 'Tajawal', sans-serif;
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            font-family: 'Cairo', sans-serif;
-            background: linear-gradient(-45deg, #1a0b2e, #4a154b, #12092f, #2b1055);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            color: #ffffff;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .navbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: var(--font-headings);
+            font-size: 2.2rem;
+            color: var(--accent-color);
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-left: auto;
+        }
+
+        .spacer {
+            width: 100px;
+        }
+
+        .controls button {
+            background: rgba(31, 40, 51, 0.8);
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: var(--font-text);
+            font-weight: bold;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .controls button:hover {
+            background: var(--accent-color);
+            color: var(--bg-color);
+        }
+
+        .hero {
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
-            height: 100vh;
-            overflow: hidden;
-            position: relative;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            background: linear-gradient(to bottom, rgba(11, 12, 16, 0.9), rgba(31, 40, 51, 0.8)), url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
         }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .hero h1 {
+            font-family: var(--font-headings);
+            font-size: 3.5rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
         }
 
-        .lang-btn {
-            position: absolute;
-            top: 25px;
-            right: 25px;
-            padding: 8px 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .hero-btn {
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            padding: 15px 30px;
+            font-size: 1.2rem;
             border-radius: 30px;
             cursor: pointer;
-            backdrop-filter: blur(10px);
+            font-family: var(--font-text);
             transition: all 0.4s ease;
-            font-family: 'Cairo', sans-serif;
-            font-weight: 700;
-        }
-
-        .lang-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
-            transform: scale(1.05);
-        }
-
-        .image-container {
-            width: 280px;
-            height: 280px;
-            margin-bottom: 30px;
-            border-radius: 15px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(138, 43, 226, 0.4);
-            overflow: hidden;
-            animation: float 6s ease-in-out infinite;
-            position: relative;
-        }
-
-        .image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-
-        .image-container:hover img {
-            transform: scale(1.1);
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
-        }
-
-        .btn-group {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .btn-main {
-            padding: 12px 35px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
             text-decoration: none;
-            font-size: 1.1rem;
-            border-radius: 50px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            text-align: center;
-            width: 250px;
         }
 
-        .btn-main:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.6);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        .hero-btn:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .articles-section {
+            padding: 100px 20px;
+            text-align: center;
+            background-color: var(--bg-color);
+        }
+
+        .articles-section h2 {
+            font-family: var(--font-headings);
+            font-size: 2.8rem;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .articles-section > p {
+            font-size: 1.2rem;
+            margin-bottom: 50px;
+            color: #8a8a8a;
+        }
+
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background-color: var(--secondary-bg);
+            padding: 40px 30px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 450px;
+            text-align: right;
+            border-bottom: 4px solid transparent;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-bottom: 4px solid var(--accent-color);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.7);
+        }
+
+        .card h3 {
+            font-family: var(--font-headings);
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: var(--text-color);
+        }
+
+        .card a {
+            display: inline-block;
+            text-decoration: none;
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .card a:hover {
+            color: var(--accent-hover);
             letter-spacing: 1px;
         }
 
-        footer {
-            position: absolute;
-            bottom: 20px;
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.6);
-            letter-spacing: 0.5px;
+        .quote-section {
+            padding: 80px 20px;
+            background-color: var(--secondary-bg);
             text-align: center;
-            width: 100%;
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+        }
+
+        .quote-section blockquote {
+            font-family: var(--font-headings);
+            font-size: 2rem;
+            color: var(--accent-color);
+            max-width: 800px;
+            margin: 0 auto;
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: var(--bg-color);
+        }
+
+        footer h4 {
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 10px;
+            font-family: var(--font-headings);
+        }
+
+        footer p.sub-footer {
+            color: #8a8a8a;
+            margin-bottom: 30px;
+        }
+
+        footer p.copyright {
+            font-size: 0.9rem;
+            color: #555;
+            border-top: 1px solid #222;
+            padding-top: 20px;
+        }
+        
+        footer p.copyright span {
+            color: var(--accent-color);
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+                position: relative;
+            }
+            .logo {
+                position: static;
+                transform: none;
+            }
+            .controls {
+                margin-left: 0;
+            }
         }
     </style>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="spacer"></div>
+        <div class="logo" id="site-logo">سحر الكتابة</div>
+        <div class="controls">
+            <button id="translateBtn" onclick="toggleLanguage()">English</button>
+            <button id="ttsBtn" onclick="readAloud()">🔊 قراءة الصفحة</button>
+        </div>
+    </nav>
 
-    <button class="lang-btn" id="lang-btn" onclick="toggleLanguage()">English</button>
+    <header class="hero">
+        <h1 id="hero-title">مرحبًا بك في عالمٍ من التأمل.</h1>
+        <p id="hero-subtitle">كلمات لا تبحث عن إعجاب... بل تبحث عن أن تترك أثرًا في داخلك.</p>
+        <button class="hero-btn" onclick="scrollToArticles()" id="hero-btn">📖 ابدأ القراءة</button>
+    </header>
 
-    <div class="image-container">
-        <img src="img.jpeg" alt="Artistic Awareness">
-    </div>
+    <section class="articles-section" id="articles">
+        <h2 id="articles-title">الكتابات</h2>
+        <p id="articles-subtitle">اختر المقال الذي يلفت انتباهك، واترك الكلمات تقودك.</p>
+        
+        <div class="cards-container">
+            <div class="card">
+                <h3 id="card1-title">عندما يشيخ الطفل</h3>
+                <p id="card1-desc">عندما تُسرق طفولة الإنسان قبل أن يعيشها...</p>
+                <a href="m.html" id="card1-btn">اقرأ المقال &larr;</a>
+            </div>
 
-    <div class="btn-group">
-        <button class="btn-main" id="read-btn" onclick="readWelcome()">قراءة اصطناعية</button>
-        <a href="g.html" class="btn-main" id="enter-btn">انتقل إلى كتابة جحيم الوعي</a>
-        <a href="m.html" class="btn-main" id="child-btn">انتقل إلى كتابة عندما يشيخ الطفل</a>
-    </div>
+            <div class="card">
+                <h3 id="card2-title">جحيم الوعي</h3>
+                <p id="card2-desc">ماذا لو أصبح الوعي نفسه عبئًا لا يمكن الهروب منه؟</p>
+                <a href="g.html" id="card2-btn">اقرأ المقال &larr;</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="quote-section">
+        <blockquote id="dynamic-quote">
+            "ليست كل الكلمات تُقرأ... بعضها يغيّر من يقرؤها."
+        </blockquote>
+    </section>
 
     <footer>
-        <span id="copyright">هذا العمل الفني تابع لـ Old Wolf للبرمجيات التابعة للفنان جورج عماد رمزي</span>
+        <h4 id="footer-title">شكرًا لزيارتك.</h4>
+        <p class="sub-footer" id="footer-subtitle">ستُضاف كتابات جديدة قريبًا.</p>
+        <p class="copyright">
+            جميع حقوق النشر محفوظه <span>old wolf</span> للبرمجيات التابعه للفنان <span>جورج عماد رمزي</span> &copy; 2026
+        </p>
     </footer>
 
     <script>
-        let isArabic = true;
+        function scrollToArticles() {
+            document.getElementById('articles').scrollIntoView({ behavior: 'smooth' });
+        }
 
-        function toggleLanguage() {
-            isArabic = !isArabic;
-            document.getElementById('html-root').dir = isArabic ? 'rtl' : 'ltr';
-            
-            if (isArabic) {
-                document.getElementById('lang-btn').innerText = "English";
-                document.getElementById('read-btn').innerText = "قراءة اصطناعية";
-                document.getElementById('enter-btn').innerText = "انتقل إلى كتابة جحيم الوعي";
-                document.getElementById('child-btn').innerText = "انتقل إلى كتابة عندما يشيخ الطفل";
-                document.getElementById('copyright').innerText = "هذا العمل الفني تابع لـ Old Wolf للبرمجيات التابعة للفنان جورج عماد رمزي";
-            } else {
-                document.getElementById('lang-btn').innerText = "عربي";
-                document.getElementById('read-btn').innerText = "Artificial Reading";
-                document.getElementById('enter-btn').innerText = "Proceed to The Hell of Awareness";
-                document.getElementById('child-btn').innerText = "Proceed to When the Child Ages";
-                document.getElementById('copyright').innerText = "This artwork belongs to Old Wolf Software by Artist George Emad Ramzy";
+        const quotes = [
+            "ليست كل الكلمات تُقرأ... بعضها يغيّر من يقرؤها.",
+            "العمق ليس في تعقيد الفكرة، بل في صدق الشعور الذي ولّدها.",
+            "نحن لا نكتب لنُفهم، بل نكتب لنتخلص من ثقل الفهم.",
+            "في زحام الأصوات، الصمت هو الفلسفة الأرقى."
+        ];
+        
+        window.onload = function() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            document.getElementById('dynamic-quote').innerText = '"' + quotes[randomIndex] + '"';
+        };
+
+        function readAloud() {
+            if ('speechSynthesis' in window) {
+                let textToRead = document.getElementById('site-logo').innerText + ". " +
+                                 document.getElementById('hero-title').innerText + ". " +
+                                 document.getElementById('hero-subtitle').innerText + ". " +
+                                 document.getElementById('dynamic-quote').innerText;
+                
+                let utterance = new SpeechSynthesisUtterance(textToRead);
+                utterance.lang = currentLang === 'ar' ? 'ar-SA' : 'en-US'; 
+                utterance.rate = 0.9; 
+                window.speechSynthesis.speak(utterance);
             }
         }
 
-        function readWelcome() {
-            const textAr = "هذا العمل الفني تابع لأولد وولف للبرمجيات التابعة للفنان جورج عماد رمزي. انتقل إلى كتابة جحيم الوعي.";
-            const textEn = "This artwork belongs to Old Wolf Software by Artist George Emad Ramzy. Proceed to The Hell of Awareness.";
+        let currentLang = 'ar';
+        const dictionary = {
+            ar: {
+                siteLogo: "سحر الكتابة",
+                heroTitle: "مرحبًا بك في عالمٍ من التأمل.",
+                heroSub: "كلمات لا تبحث عن إعجاب... بل تبحث عن أن تترك أثرًا في داخلك.",
+                heroBtn: "📖 ابدأ القراءة",
+                artTitle: "الكتابات",
+                artSub: "اختر المقال الذي يلفت انتباهك، واترك الكلمات تقودك.",
+                card1T: "عندما يشيخ الطفل",
+                card1D: "عندما تُسرق طفولة الإنسان قبل أن يعيشها...",
+                card1B: "اقرأ المقال ←",
+                card2T: "جحيم الوعي",
+                card2D: "ماذا لو أصبح الوعي نفسه عبئًا لا يمكن الهروب منه؟",
+                card2B: "اقرأ المقال ←",
+                footTitle: "شكرًا لزيارتك.",
+                footSub: "ستُضاف كتابات جديدة قريبًا.",
+                translateBtn: "English",
+                ttsBtn: "🔊 قراءة الصفحة"
+            },
+            en: {
+                siteLogo: "The Magic of Writing",
+                heroTitle: "Welcome to a World of Contemplation.",
+                heroSub: "Words that don't seek admiration... but seek to leave a mark inside you.",
+                heroBtn: "📖 Start Reading",
+                artTitle: "Writings",
+                artSub: "Choose the article that catches your eye, and let the words guide you.",
+                card1T: "When a Child Ages",
+                card1D: "When a human's childhood is stolen before they live it...",
+                card1B: "Read Article →",
+                card2T: "The Hell of Consciousness",
+                card2D: "What if consciousness itself became an inescapable burden?",
+                card2B: "Read Article →",
+                footTitle: "Thank you for visiting.",
+                footSub: "New writings will be added soon.",
+                translateBtn: "العربية",
+                ttsBtn: "🔊 Read Page"
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            document.documentElement.lang = currentLang;
+            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
             
-            const utterance = new SpeechSynthesisUtterance(isArabic ? textAr : textEn);
-            utterance.lang = isArabic ? 'ar-SA' : 'en-US';
-            utterance.rate = 0.9; 
-            window.speechSynthesis.speak(utterance);
+            document.getElementById('site-logo').innerText = dictionary[currentLang].siteLogo;
+            document.getElementById('hero-title').innerText = dictionary[currentLang].heroTitle;
+            document.getElementById('hero-subtitle').innerText = dictionary[currentLang].heroSub;
+            document.getElementById('hero-btn').innerText = dictionary[currentLang].heroBtn;
+            document.getElementById('articles-title').innerText = dictionary[currentLang].artTitle;
+            document.getElementById('articles-subtitle').innerText = dictionary[currentLang].artSub;
+            document.getElementById('card1-title').innerText = dictionary[currentLang].card1T;
+            document.getElementById('card1-desc').innerText = dictionary[currentLang].card1D;
+            document.getElementById('card1-btn').innerText = dictionary[currentLang].card1B;
+            document.getElementById('card2-title').innerText = dictionary[currentLang].card2T;
+            document.getElementById('card2-desc').innerText = dictionary[currentLang].card2D;
+            document.getElementById('card2-btn').innerText = dictionary[currentLang].card2B;
+            document.getElementById('footer-title').innerText = dictionary[currentLang].footTitle;
+            document.getElementById('footer-subtitle').innerText = dictionary[currentLang].footSub;
+            document.getElementById('translateBtn').innerText = dictionary[currentLang].translateBtn;
+            document.getElementById('ttsBtn').innerText = dictionary[currentLang].ttsBtn;
+            
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.style.textAlign = currentLang === 'ar' ? 'right' : 'left';
+            });
         }
     </script>
 </body>
