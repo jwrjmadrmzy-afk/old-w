@@ -11,18 +11,15 @@
 
     <style>
         :root {
-            /* الألوان الأساسية كما طلبت بالضبط */
             --bg-base: #07080B;
-            --card-bg: rgba(15, 18, 24, 0.70);
+            --card-bg: rgba(15, 18, 24, 0.85);
             --text-primary: #ECE8DF;
             --text-secondary: #B7B6B2;
             --heading: #F7F3EA;
+            --btn-bg-transparent: rgba(15, 18, 24, 0.6);
+            --btn-hover-transparent: rgba(45, 56, 67, 0.8);
             --accent: #CBB58A;
-            /* ألوان الأزرار تم تحويلها لشفافة (RGBA) لنفس الدرجات اللي طلبتها */
-            --btn-bg-transparent: rgba(26, 32, 39, 0.5); /* يعادل #1A2027 بشفافية */
-            --btn-hover-transparent: rgba(45, 56, 67, 0.7); /* يعادل #2D3843 بشفافية */
-            
-            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition: all 0.3s ease;
         }
 
         * {
@@ -45,149 +42,162 @@
             background-image: url("WhatsApp\ Image\ 2026-09-06\ at\ 10.17.08\ PM.jpeg");
         }
 
-        /* طبقة حماية خفيفة جداً عشان الكتابة تبان وماتخفيش الصورة */
+        /* طبقة التعتيم للخلفية */
         .bg-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(7, 8, 11, 0.3); /* خففنا الشفافية جداً */
-            backdrop-filter: blur(3px); /* ضبابية خفيفة للخلفية */
-            -webkit-backdrop-filter: blur(3px);
+            background: rgba(7, 8, 11, 0.6);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
             z-index: -1;
         }
 
         .container {
-            max-width: 960px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 3rem 1.5rem;
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .header-decor {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .article-title {
-            color: var(--heading);
-            font-size: 2.8rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            text-shadow: 0 4px 15px rgba(0,0,0,0.8);
-        }
-
-        /* لوحة التحكم والأزرار الشفافة الزجاجية */
+        /* ترتيب الأزرار جنب بعض لتوفير المساحة */
         .controls-panel {
             display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
+            flex-direction: row; /* الأزرار تترص بالعرض */
+            flex-wrap: wrap; /* لو الشاشة صغيرة ينزلوا سطر جديد بشكل مرتب */
             justify-content: center;
-            margin-bottom: 3.5rem;
-            background: rgba(15, 18, 24, 0.4); /* خلفية شفافة للوحة */
-            padding: 1.5rem;
-            border-radius: 20px;
-            border: 1px solid rgba(203, 181, 138, 0.2);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            gap: 10px;
+            width: 100%;
+            margin-bottom: 2rem;
+            margin-top: 1rem;
         }
 
         button, .upload-label, .video-btn {
-            background-color: var(--btn-bg-transparent); /* الزرار الشفاف */
-            color: var(--accent);
-            border: 1px solid rgba(203, 181, 138, 0.4);
-            padding: 12px 25px;
-            border-radius: 12px;
+            background-color: var(--btn-bg-transparent);
+            color: var(--text-primary);
+            border: 1px solid var(--accent);
+            padding: 8px 16px; /* تصغير المسافات الداخلية لتصغير الزر */
+            border-radius: 6px;
             cursor: pointer;
-            font-family: inherit;
-            font-size: 1.15rem;
-            font-weight: bold;
+            font-family: 'Amiri', serif;
+            font-size: 1rem; /* تصغير الخط قليلاً */
+            width: auto; /* الزر ياخد مساحة الكلمة فقط */
+            text-align: center;
             transition: var(--transition);
-            backdrop-filter: blur(8px); /* تأثير الزجاج على الزرار نفسه */
-            -webkit-backdrop-filter: blur(8px);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            display: inline-block;
             text-decoration: none;
         }
 
         button:hover, .upload-label:hover, .video-btn:hover {
-            background-color: var(--btn-hover-transparent); /* لون الـ Hover الشفاف */
-            border-color: var(--accent);
-            color: var(--heading);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            background-color: var(--btn-hover-transparent);
+            box-shadow: 0 0 10px rgba(203, 181, 138, 0.3);
+            color: var(--accent);
         }
 
         input[type="file"] {
             display: none;
         }
 
-        /* البطاقات الشفافة */
-        .card {
-            background: var(--card-bg);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(203, 181, 138, 0.2);
-            border-radius: 20px;
-            padding: 2.5rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            transition: var(--transition);
+        /* العنوان */
+        .header-decor {
+            text-align: center;
+            width: 100%;
+            margin-bottom: 1.5rem;
         }
 
-        .card:hover {
-            border-color: rgba(203, 181, 138, 0.5);
-            transform: translateY(-4px);
-            background: rgba(15, 18, 24, 0.80);
+        .article-title {
+            color: var(--accent);
+            font-size: 3rem;
+            font-weight: 700;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.9);
+            line-height: 1.3;
+        }
+        
+        .en-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            display: none;
+        }
+
+        /* الخط الفاصل الذهبي */
+        .title-divider {
+            width: 100%;
+            height: 1px;
+            background-color: var(--accent);
+            opacity: 0.6;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 0 8px var(--accent);
+        }
+
+        /* البطاقات */
+        #article-content {
+            width: 100%;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(203, 181, 138, 0.15);
+            border-right: 4px solid var(--accent);
+            border-left: 4px solid var(--accent);
+            border-radius: 8px;
+            padding: 2.5rem 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            transition: var(--transition);
         }
 
         .ar-content {
             color: var(--text-primary);
-            text-align: justify;
-            font-size: 1.35rem;
+            text-align: center;
+            font-size: 1.4rem;
+            line-height: 2.2;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.8);
         }
 
         .en-content {
             display: none;
             direction: ltr;
-            text-align: left;
+            text-align: center;
             font-family: 'Cinzel', serif;
-            color: var(--heading);
+            color: var(--text-primary);
             font-size: 1.2rem;
+            line-height: 1.9;
         }
 
         /* قسم الفيديو */
         .video-section {
             text-align: center;
-            margin: 4rem 0;
-            padding: 3rem 2rem;
-            background: rgba(15, 18, 24, 0.5);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            border: 1px dashed var(--accent);
+            margin: 3rem 0;
+            width: 100%;
         }
 
         .video-section h3 {
-            color: var(--heading);
+            color: var(--accent);
             margin-bottom: 1.5rem;
+            font-size: 1.3rem;
         }
 
         /* وضع القراءة */
         body.reading-mode .controls-panel,
+        body.reading-mode .title-divider,
         body.reading-mode .video-section,
         body.reading-mode footer {
             display: none !important;
         }
 
         body.reading-mode .container {
-            max-width: 1100px;
+            max-width: 1000px;
             padding-top: 2rem;
         }
 
         body.reading-mode .card {
-            background: rgba(15, 18, 24, 0.85); /* شفافية مناسبة للقراءة */
+            background: rgba(10, 12, 16, 0.95);
             border: 2px solid var(--accent);
-            padding: 3.5rem;
-            margin-bottom: 3rem;
             transform: scale(1.02);
+            padding: 3rem 2rem;
         }
 
         body.reading-mode .ar-content {
@@ -198,67 +208,79 @@
         #exit-reading-mode {
             display: none;
             position: fixed;
-            bottom: 30px;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 1000;
             background-color: var(--btn-bg-transparent);
-            border: 2px solid var(--accent);
+            border: 1px solid var(--accent);
+            width: auto;
+            padding: 10px 30px;
         }
 
         body.reading-mode #exit-reading-mode {
-            display: inline-flex;
+            display: inline-block;
         }
 
         footer {
             text-align: center;
             color: var(--text-secondary);
-            margin-top: 4rem;
+            margin-top: 2rem;
             padding: 2rem 0;
-            border-top: 1px solid rgba(203, 181, 138, 0.2);
+            width: 100%;
+            font-size: 1.1rem;
         }
 
         @media (max-width: 768px) {
-            .article-title { font-size: 2rem; }
-            .card { padding: 1.5rem; }
-            .controls-panel { flex-direction: column; }
-            button, .upload-label { width: 100%; }
+            .article-title { font-size: 2.4rem; }
+            .card { padding: 1.8rem 1.2rem; }
+            .ar-content { font-size: 1.25rem; }
+            
+            /* تعديل الأزرار في شاشة الموبايل عشان يفضلوا جنب بعض */
+            button, .upload-label, .video-btn { 
+                font-size: 0.95rem; 
+                padding: 6px 12px;
+            }
         }
     </style>
 </head>
 <body>
 
     <div class="bg-overlay"></div>
-    <audio id="audio-player" loop></audio>
+    <audio id="audio-player" loop href"
+        ></audio>
+    
 
     <button id="exit-reading-mode" onclick="toggleReadingMode()">إنهاء وضع القراءة ✖</button>
 
     <div class="container">
         
-        <div class="header-decor">
-            <h1 class="article-title ar-content">المجهول: محرك العقل البشري أم عدوّ طبيعته؟</h1>
-            <h1 class="article-title en-content">THE UNKNOWN: ENGINE OF THE MIND OR ENEMY OF ITS NATURE?</h1>
-        </div>
-
+        <!-- لوحة الأزرار (بالعرض) -->
         <div class="controls-panel">
             <label class="upload-label">
-                🖼️ خلفية المقال
+                خلفية المقال
                 <input type="file" id="bg-upload" accept="image/*">
             </label>
             
             <label class="upload-label">
-                🎵 الموسيقى
-                <input type="file" id="audio-upload" accept="audio/*">
+                موسيقى
+                <input type="file" id="audio-upload" accept="mp.3.mpeg">
             </label>
             
-            <button id="play-pause-btn" onclick="toggleAudio()" style="display: none;">▶️ تشغيل</button>
-            <button onclick="toggleReadingMode()">📖 وضع القراءة</button>
-            <button id="tts-btn" onclick="toggleSpeech()">🔊 قراءة صوتية</button>
-            <button onclick="toggleLanguage()" id="lang-btn">🌐 English</button>
+            <button id="play-pause-btn" onclick="toggleAudio()" style="display: none;">إيقاف الموسيقى</button>
+            <button onclick="toggleReadingMode()">وضع القراءة</button>
+            <button onclick="toggleLanguage()" id="lang-btn">English</button>
+            <button id="tts-btn" onclick="toggleSpeech()">قراءة صوتية</button>
         </div>
 
+        <div class="header-decor">
+            <h1 class="article-title ar-content" style="display: block;">المجهول: محرك العقل البشري أم عدوّ طبيعته؟</h1>
+            <h1 class="article-title en-title en-content">THE UNKNOWN: ENGINE OF THE MIND OR ENEMY OF ITS NATURE?</h1>
+        </div>
+
+        <div class="title-divider"></div>
+
         <div id="article-content">
-            
             <div class="card">
                 <div class="ar-content">
                     منذ أن فتح الإنسان عينيه على هذا العالم، كان المجهول واقفًا أمامه كبحرٍ لا تُرى نهايته. وكلما ظنّ أنه رسم على سطحه خريطةً جديدة، اكتشف أن وراء الأفق أفقًا آخر، وأن كل إجابة قد تكون مفتاحًا لسؤال أكثر عمقًا. ولعلّ تاريخ الإنسان ليس إلا قصةً طويلة بين كائنٍ يريد أن يعرف، وكونٍ لا يكشف أسراره دفعةً واحدة.
@@ -353,7 +375,7 @@
 
         <div class="video-section">
             <h3>هل تريد رؤية فيديو تخيلي فلسفي معبر عن المجهول؟</h3>
-            <a href="WhatsApp Video 2026-09-07 at 10.24.24 PM.mp4" class="video-btn">🎬 مشاهدة الفيديو</a>
+            <a href="WhatsApp Video 2026-09-07 at 10.24.24 PM.mp4" class="video-btn">مشاهدة الفيديو</a>
         </div>
 
         <footer>
@@ -382,20 +404,20 @@
             const file = e.target.files[0];
             if (file) {
                 audioPlayer.src = URL.createObjectURL(file);
-                playPauseBtn.style.display = 'inline-flex';
+                playPauseBtn.style.display = 'inline-block';
                 audioPlayer.play();
                 isPlaying = true;
-                playPauseBtn.innerHTML = '⏸️ إيقاف';
+                playPauseBtn.innerHTML = 'إيقاف الموسيقى';
             }
         });
 
         function toggleAudio() {
             if (isPlaying) {
                 audioPlayer.pause();
-                playPauseBtn.innerHTML = '▶️ تشغيل';
+                playPauseBtn.innerHTML = 'تشغيل الموسيقى';
             } else {
                 audioPlayer.play();
-                playPauseBtn.innerHTML = '⏸️ إيقاف';
+                playPauseBtn.innerHTML = 'إيقاف الموسيقى';
             }
             isPlaying = !isPlaying;
         }
@@ -407,10 +429,17 @@
         let isEnglish = false;
         function toggleLanguage() {
             isEnglish = !isEnglish;
-            document.querySelectorAll('.ar-content').forEach(el => el.style.display = isEnglish ? 'none' : 'block');
-            document.querySelectorAll('.en-content').forEach(el => el.style.display = isEnglish ? 'block' : 'none');
+            
+            document.querySelectorAll('.ar-content').forEach(el => {
+                el.style.display = isEnglish ? 'none' : 'block';
+            });
+            
+            document.querySelectorAll('.en-content').forEach(el => {
+                el.style.display = isEnglish ? 'block' : 'none';
+            });
+            
             document.dir = isEnglish ? "ltr" : "rtl";
-            document.getElementById('lang-btn').innerHTML = isEnglish ? '🌐 العربية' : '🌐 English';
+            document.getElementById('lang-btn').innerHTML = isEnglish ? 'عربي' : 'English';
             if (isSpeaking) stopSpeech();
         }
 
@@ -433,8 +462,8 @@
             utterance.rate = 0.9;
             
             const btn = document.getElementById('tts-btn');
-            utterance.onstart = () => { isSpeaking = true; btn.innerHTML = '⏹️ إيقاف القراءة'; };
-            utterance.onend = utterance.onerror = () => { isSpeaking = false; btn.innerHTML = '🔊 قراءة صوتية'; };
+            utterance.onstart = () => { isSpeaking = true; btn.innerHTML = 'إيقاف القراءة'; };
+            utterance.onend = utterance.onerror = () => { isSpeaking = false; btn.innerHTML = 'قراءة صوتية'; };
             
             window.speechSynthesis.speak(utterance);
         }
@@ -442,7 +471,7 @@
         function stopSpeech() {
             window.speechSynthesis.cancel();
             isSpeaking = false;
-            document.getElementById('tts-btn').innerHTML = '🔊 قراءة صوتية';
+            document.getElementById('tts-btn').innerHTML = 'قراءة صوتية';
         }
     </script>
 </body>
