@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المجهول: محرك العقل البشري أم عدوّ طبيعته؟</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* الألوان الأساسية كما طلبت بالضبط */
+            --bg-base: #07080B;
+            --card-bg: rgba(15, 18, 24, 0.70);
+            --text-primary: #ECE8DF;
+            --text-secondary: #B7B6B2;
+            --heading: #F7F3EA;
+            --accent: #CBB58A;
+            /* ألوان الأزرار تم تحويلها لشفافة (RGBA) لنفس الدرجات اللي طلبتها */
+            --btn-bg-transparent: rgba(26, 32, 39, 0.5); /* يعادل #1A2027 بشفافية */
+            --btn-hover-transparent: rgba(45, 56, 67, 0.7); /* يعادل #2D3843 بشفافية */
+            
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Amiri', serif;
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            line-height: 2.1;
+            font-size: 1.3rem;
+            min-height: 100vh;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            transition: var(--transition);
+            background-image: url("WhatsApp\ Image\ 2026-09-06\ at\ 10.17.08\ PM.jpeg");
+        }
+
+        /* طبقة حماية خفيفة جداً عشان الكتابة تبان وماتخفيش الصورة */
+        .bg-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(7, 8, 11, 0.3); /* خففنا الشفافية جداً */
+            backdrop-filter: blur(3px); /* ضبابية خفيفة للخلفية */
+            -webkit-backdrop-filter: blur(3px);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        .header-decor {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .article-title {
+            color: var(--heading);
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.8);
+        }
+
+        /* لوحة التحكم والأزرار الشفافة الزجاجية */
+        .controls-panel {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 3.5rem;
+            background: rgba(15, 18, 24, 0.4); /* خلفية شفافة للوحة */
+            padding: 1.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(203, 181, 138, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        button, .upload-label, .video-btn {
+            background-color: var(--btn-bg-transparent); /* الزرار الشفاف */
+            color: var(--accent);
+            border: 1px solid rgba(203, 181, 138, 0.4);
+            padding: 12px 25px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.15rem;
+            font-weight: bold;
+            transition: var(--transition);
+            backdrop-filter: blur(8px); /* تأثير الزجاج على الزرار نفسه */
+            -webkit-backdrop-filter: blur(8px);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        button:hover, .upload-label:hover, .video-btn:hover {
+            background-color: var(--btn-hover-transparent); /* لون الـ Hover الشفاف */
+            border-color: var(--accent);
+            color: var(--heading);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        /* البطاقات الشفافة */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(203, 181, 138, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            border-color: rgba(203, 181, 138, 0.5);
+            transform: translateY(-4px);
+            background: rgba(15, 18, 24, 0.80);
+        }
+
+        .ar-content {
+            color: var(--text-primary);
+            text-align: justify;
+            font-size: 1.35rem;
+        }
+
+        .en-content {
+            display: none;
+            direction: ltr;
+            text-align: left;
+            font-family: 'Cinzel', serif;
+            color: var(--heading);
+            font-size: 1.2rem;
+        }
+
+        /* قسم الفيديو */
+        .video-section {
+            text-align: center;
+            margin: 4rem 0;
+            padding: 3rem 2rem;
+            background: rgba(15, 18, 24, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px dashed var(--accent);
+        }
+
+        .video-section h3 {
+            color: var(--heading);
+            margin-bottom: 1.5rem;
+        }
+
+        /* وضع القراءة */
+        body.reading-mode .controls-panel,
+        body.reading-mode .video-section,
+        body.reading-mode footer {
+            display: none !important;
+        }
+
+        body.reading-mode .container {
+            max-width: 1100px;
+            padding-top: 2rem;
+        }
+
+        body.reading-mode .card {
+            background: rgba(15, 18, 24, 0.85); /* شفافية مناسبة للقراءة */
+            border: 2px solid var(--accent);
+            padding: 3.5rem;
+            margin-bottom: 3rem;
+            transform: scale(1.02);
+        }
+
+        body.reading-mode .ar-content {
+            font-size: 1.8rem;
+            line-height: 2.4;
+        }
+
+        #exit-reading-mode {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background-color: var(--btn-bg-transparent);
+            border: 2px solid var(--accent);
+        }
+
+        body.reading-mode #exit-reading-mode {
+            display: inline-flex;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-top: 4rem;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(203, 181, 138, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .article-title { font-size: 2rem; }
+            .card { padding: 1.5rem; }
+            .controls-panel { flex-direction: column; }
+            button, .upload-label { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-overlay"></div>
+    <audio id="audio-player" loop></audio>
+
+    <button id="exit-reading-mode" onclick="toggleReadingMode()">إنهاء وضع القراءة ✖</button>
+
+    <div class="container">
+        
+        <div class="header-decor">
+            <h1 class="article-title ar-content">المجهول: محرك العقل البشري أم عدوّ طبيعته؟</h1>
+            <h1 class="article-title en-content">THE UNKNOWN: ENGINE OF THE MIND OR ENEMY OF ITS NATURE?</h1>
+        </div>
+
+        <div class="controls-panel">
+            <label class="upload-label">
+                🖼️ خلفية المقال
+                <input type="file" id="bg-upload" accept="image/*">
+            </label>
+            
+            <label class="upload-label">
+                🎵 الموسيقى
+                <input type="file" id="audio-upload" accept="audio/*">
+            </label>
+            
+            <button id="play-pause-btn" onclick="toggleAudio()" style="display: none;">▶️ تشغيل</button>
+            <button onclick="toggleReadingMode()">📖 وضع القراءة</button>
+            <button id="tts-btn" onclick="toggleSpeech()">🔊 قراءة صوتية</button>
+            <button onclick="toggleLanguage()" id="lang-btn">🌐 English</button>
+        </div>
+
+        <div id="article-content">
+            
+            <div class="card">
+                <div class="ar-content">
+                    منذ أن فتح الإنسان عينيه على هذا العالم، كان المجهول واقفًا أمامه كبحرٍ لا تُرى نهايته. وكلما ظنّ أنه رسم على سطحه خريطةً جديدة، اكتشف أن وراء الأفق أفقًا آخر، وأن كل إجابة قد تكون مفتاحًا لسؤال أكثر عمقًا. ولعلّ تاريخ الإنسان ليس إلا قصةً طويلة بين كائنٍ يريد أن يعرف، وكونٍ لا يكشف أسراره دفعةً واحدة.
+                </div>
+                <div class="en-content">
+                    Since man first opened his eyes to this world, the unknown has stood before him like an endless sea. Whenever he thought he had drawn a new map on its surface, he discovered another horizon beyond, realizing that every answer might just be a key to a deeper question.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="ar-content">
+                    لكن هنا يظهر سؤال فلسفي شديد العمق: هل المجهول هو الوقود الذي أشعل العقل البشري ودفعه إلى الاكتشاف، أم أنه عدوّ لطبيعة العقل الذي يميل إلى النظام واليقين والسيطرة؟ قد يبدو السؤال متناقضًا، لكن هذا التناقض هو جوهر العلاقة بين الإنسان والمجهول.
+                </div>
+                <div class="en-content">
+                    But here emerges a profoundly deep philosophical question: Is the unknown the fuel that ignited the human mind and drove it to discovery, or is it an enemy to the mind's nature, which leans towards order, certainty, and control?
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="ar-content">
+                    فالعقل البشري لا يحب الفراغ. حين يواجه شيئًا لا يفهمه، يحاول أن يملأ الفراغ بتفسير، وأن يحوّل الفوضى إلى نظام، والظلام إلى صورة، والسؤال إلى إجابة. وكأن العقل مدينةٌ لا تحتمل أن يبقى فيها شارع بلا اسم؛ فإذا وجد طريقًا مجهولًا، بدأ يرسم له خريطة.
+                </div>
+                <div class="en-content">
+                    The human mind despises a vacuum. When faced with something it doesn't understand, it tries to fill the void with an explanation, turning chaos into order, darkness into an image, and a question into an answer.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="ar-content">
+                    ومن هنا يمكن النظر إلى المجهول بوصفه محركًا للعقل. فلولا الأشياء التي لا نعرفها، لما كان هناك دافع حقيقي للبحث. لم يكن الإنسان ليحدّق في السماء لولا أن النجوم طرحت عليه أسئلةً لم تستطع عيناه الإجابة عنها.
+                </div>
+                <div class="en-content">
+                    Hence, the unknown can be seen as the engine of the mind. Without the things we do not know, there would be no real motive to search. Man would not have gazed at the sky had the stars not posed questions his eyes couldn't answer.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="ar-content">
+                    غير أن للمجهول وجهًا آخر. فالعقل لا يعيش بسهولة في حالة عدم اليقين. إنه يبحث بطبيعته عن الأنماط والروابط والتفسيرات. ولذلك قد يتحول المجهول من حافز إلى تهديد. فالإنسان حين يعجز عن تفسير ظاهرة، قد يخاف منها.
+                </div>
+                <div class="en-content">
+                    However, the unknown has another face. The mind does not easily dwell in a state of uncertainty. By nature, it seeks patterns, connections, and explanations. Therefore, the unknown can turn from a catalyst into a threat.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="ar-content">
+                    ومن هنا نشأت مفارقة عظيمة: نحن نطارد المجهول لأننا نكرهه، ونحتاج إليه لأننا نطارده. فلو اختفى المجهول تمامًا، لتوقف السؤال، وإذا توقف السؤال توقفت المعرفة عن النمو.
+                </div>
+                <div class="en-content">
+                    From this arises a great paradox: we chase the unknown because we hate it, and we need it because we chase it. If the unknown were to vanish entirely, questioning would cease, and if questioning ceased, knowledge would stop growing.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="ar-content">
+                    وهنا تظهر عظمة العقل البشري: ليس في قدرته على معرفة كل شيء، وإنما في قدرته على تحويل جهله إلى سؤال، وتحويل السؤال إلى بحث، وتحويل البحث إلى معرفة. إن الإنسان لا ينتصر على المجهول بإلغائه، بل بتحويل جزء منه إلى معلوم.
+                </div>
+                <div class="en-content">
+                    Here lies the greatness of the human mind: not in its ability to know everything, but in its ability to turn its ignorance into a question, the question into a quest, and the quest into knowledge.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="ar-content">
+                    ولعل أجمل ما في هذه العلاقة أن المجهول لا يقف خارج الإنسان فقط؛ بل يسكن داخله أيضًا. فالإنسان يحاول أن يفهم الكون، وفي أثناء ذلك يحاول أن يفهم نفسه. إن العقل يشبه مصباحًا يسير في كهف لا نهاية له.
+                </div>
+                <div class="en-content">
+                    Perhaps the most beautiful aspect of this relationship is that the unknown does not merely stand outside man; it resides within him too. Man tries to understand the universe, and in the process, he tries to understand himself.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="ar-content">
+                    فالعلم لا يبدأ حين نمتلك الإجابة، وإنما حين نمتلك الشجاعة لنقول: لا أعرف. وربما كانت أعظم لحظة في تاريخ العقل البشري ليست اللحظة التي قال فيها الإنسان: «لقد عرفت»، بل اللحظة التي امتلك فيها الشجاعة ليقول: «كنت أظن أنني أعرف، لكنني اكتشفت أن السؤال أكبر مني.»
+                </div>
+                <div class="en-content">
+                    Science does not begin when we have the answer, but when we have the courage to say: "I do not know." Perhaps the greatest moment in the history of the human mind was not when man said, "I have known," but the moment he had the courage to say, "I thought I knew..."
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="ar-content">
+                    وهكذا يصبح المجهول مفارقة فلسفيًا عظيمًا: إنه عدوّ لطبيعة العقل حين يطلب العقل يقينًا مطلقًا، لكنه يصبح محركًا له حين يحوّل العقل قلقه من الجهل إلى فضول. فالمجهول ليس جدارًا يقف أمام العقل، بل ربما كان هو الباب نفسه.
+                </div>
+                <div class="en-content">
+                    Thus, the unknown becomes a great philosophical paradox: it is an enemy to the mind's nature when the mind demands absolute certainty, but it becomes its engine when the mind transforms its anxiety of ignorance into curiosity.
+                </div>
+            </div>
+
+        </div>
+
+        <div class="video-section">
+            <h3>هل تريد رؤية فيديو تخيلي فلسفي معبر عن المجهول؟</h3>
+            <a href="WhatsApp Video 2026-09-07 at 10.24.24 PM.mp4" class="video-btn">🎬 مشاهدة الفيديو</a>
+        </div>
+
+        <footer>
+            هذا العمل تابع لجورج عماد رمزي المبرمج والفنان
+        </footer>
+
+    </div>
+
+    <script>
+        document.getElementById('bg-upload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    document.body.style.backgroundImage = `url('${event.target.result}')`;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        const audioPlayer = document.getElementById('audio-player');
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        let isPlaying = false;
+
+        document.getElementById('audio-upload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                audioPlayer.src = URL.createObjectURL(file);
+                playPauseBtn.style.display = 'inline-flex';
+                audioPlayer.play();
+                isPlaying = true;
+                playPauseBtn.innerHTML = '⏸️ إيقاف';
+            }
+        });
+
+        function toggleAudio() {
+            if (isPlaying) {
+                audioPlayer.pause();
+                playPauseBtn.innerHTML = '▶️ تشغيل';
+            } else {
+                audioPlayer.play();
+                playPauseBtn.innerHTML = '⏸️ إيقاف';
+            }
+            isPlaying = !isPlaying;
+        }
+
+        function toggleReadingMode() {
+            document.body.classList.toggle('reading-mode');
+        }
+
+        let isEnglish = false;
+        function toggleLanguage() {
+            isEnglish = !isEnglish;
+            document.querySelectorAll('.ar-content').forEach(el => el.style.display = isEnglish ? 'none' : 'block');
+            document.querySelectorAll('.en-content').forEach(el => el.style.display = isEnglish ? 'block' : 'none');
+            document.dir = isEnglish ? "ltr" : "rtl";
+            document.getElementById('lang-btn').innerHTML = isEnglish ? '🌐 العربية' : '🌐 English';
+            if (isSpeaking) stopSpeech();
+        }
+
+        let isSpeaking = false;
+        function toggleSpeech() {
+            isSpeaking ? stopSpeech() : startSpeech();
+        }
+
+        function startSpeech() {
+            if (!('speechSynthesis' in window)) return alert("المتصفح لا يدعم القراءة الصوتية.");
+            window.speechSynthesis.cancel();
+            
+            const selector = isEnglish ? '.card .en-content' : '.card .ar-content';
+            let textToRead = Array.from(document.querySelectorAll(selector))
+                                  .filter(p => window.getComputedStyle(p).display !== 'none')
+                                  .map(p => p.innerText).join(" . ");
+                                  
+            let utterance = new SpeechSynthesisUtterance(textToRead);
+            utterance.lang = isEnglish ? 'en-US' : 'ar-SA';
+            utterance.rate = 0.9;
+            
+            const btn = document.getElementById('tts-btn');
+            utterance.onstart = () => { isSpeaking = true; btn.innerHTML = '⏹️ إيقاف القراءة'; };
+            utterance.onend = utterance.onerror = () => { isSpeaking = false; btn.innerHTML = '🔊 قراءة صوتية'; };
+            
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function stopSpeech() {
+            window.speechSynthesis.cancel();
+            isSpeaking = false;
+            document.getElementById('tts-btn').innerHTML = '🔊 قراءة صوتية';
+        }
+    </script>
+</body>
+</html>
