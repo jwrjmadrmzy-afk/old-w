@@ -305,6 +305,13 @@
                 <p id="card2-desc">ماذا لو أصبح الوعي نفسه عبئًا لا يمكن الهروب منه؟</p>
                 <a href="g.html" id="card2-btn">اقرأ المقال &larr;</a>
             </div>
+
+            <!-- المقال الثالث الجديد -->
+            <div class="card">
+                <h3 id="card3-title">المجهول</h3>
+                <p id="card3-desc">ماذا وراء الضوء</p>
+                <a href="unknown.html" id="card3-btn">اقرأ المقال &larr;</a>
+            </div>
         </div>
     </section>
 
@@ -368,6 +375,9 @@
                 card2T: "جحيم الوعي",
                 card2D: "ماذا لو أصبح الوعي نفسه عبئًا لا يمكن الهروب منه؟",
                 card2B: "اقرأ المقال ←",
+                card3T: "المجهول",
+                card3D: "ماذا وراء الضوء",
+                card3B: "اقرأ المقال ←",
                 footTitle: "شكرًا لزيارتك.",
                 footSub: "ستُضاف كتابات جديدة قريبًا.",
                 translateBtn: "English",
@@ -386,6 +396,9 @@
                 card2T: "The Hell of Consciousness",
                 card2D: "What if consciousness itself became an inescapable burden?",
                 card2B: "Read Article →",
+                card3T: "The Unknown",
+                card3D: "What is behind the light",
+                card3B: "Read Article →",
                 footTitle: "Thank you for visiting.",
                 footSub: "New writings will be added soon.",
                 translateBtn: "العربية",
@@ -404,12 +417,20 @@
             document.getElementById('hero-btn').innerText = dictionary[currentLang].heroBtn;
             document.getElementById('articles-title').innerText = dictionary[currentLang].artTitle;
             document.getElementById('articles-subtitle').innerText = dictionary[currentLang].artSub;
+            
             document.getElementById('card1-title').innerText = dictionary[currentLang].card1T;
             document.getElementById('card1-desc').innerText = dictionary[currentLang].card1D;
             document.getElementById('card1-btn').innerText = dictionary[currentLang].card1B;
+            
             document.getElementById('card2-title').innerText = dictionary[currentLang].card2T;
             document.getElementById('card2-desc').innerText = dictionary[currentLang].card2D;
             document.getElementById('card2-btn').innerText = dictionary[currentLang].card2B;
+            
+            // تحديث محتوى البطاقة الثالثة الجديدة
+            document.getElementById('card3-title').innerText = dictionary[currentLang].card3T;
+            document.getElementById('card3-desc').innerText = dictionary[currentLang].card3D;
+            document.getElementById('card3-btn').innerText = dictionary[currentLang].card3B;
+
             document.getElementById('footer-title').innerText = dictionary[currentLang].footTitle;
             document.getElementById('footer-subtitle').innerText = dictionary[currentLang].footSub;
             document.getElementById('translateBtn').innerText = dictionary[currentLang].translateBtn;
